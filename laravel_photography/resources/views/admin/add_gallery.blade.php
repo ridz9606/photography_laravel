@@ -12,24 +12,7 @@
                 <div class="card-body">
 
 				  <form action="{{url('add_gallery')}}" method="post" class="mt-3" enctype="multipart/form-data">
-                     
-
-                        <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <select name="category_id" class="form-control">
-										<option value="">Select Category</option>
-										<?php
-										foreach($cate_arr as $data)
-										{
-										?>
-											<option value="<?php echo $data->category_id?>">
-															<?php echo $data->category_name?>
-											</option>
-										<?php
-										}
-										?>
-									</select>
-                  </div>
+            @csrf
 
                         <div class="mb-3">
                         <label class="form-label">Catalogue</label>
@@ -39,7 +22,7 @@
 										foreach($catalogue_arr as $data)
 										{
 										?>
-											<option value="<?php echo $data->catalogue_id?>">
+											<option value="<?php echo $data->id?>">
 															<?php echo $data->catalogue_name?>
 											</option>
 										<?php
@@ -48,22 +31,14 @@
 									</select>
                   </div>
 
+                       
+
                         <div class="mb-3">
-                        <label class="form-label">Image Title</label>
-                        <input type="text" name="image_title" class="form-control" >
+                        <label class="form-label">Images</label>
+                        <input type="file" name="image[]" multiple class="form-control" >
                         </div>
+
                         
-
-                        <div class="mb-3">
-                        <label class="form-label">Image</label>
-                        <input type="file" name="image" class="form-control" >
-                        </div>
-
-                        <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <input type="text" name="description" class="form-control" >
-                        </div>
-
                     
                     
                    

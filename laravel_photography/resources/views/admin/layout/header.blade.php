@@ -265,16 +265,13 @@ li.active .arrow{
     <ul><li><a href="catelogues_management">Catalogues Management</a></li></ul>
     <ul><li><a href="package_management">Packages Management</a></li></ul>
     <ul><li><a href="gallery_management">Gallery Management</a></li></ul>
-    <ul><li><a href="catelogues_management">Catalogues Management</a></li></ul>
     <ul><li><a href="slot_management">Slot Management</a></li></ul>
     <ul><li><a href="appointments_management">Appointments Management</a></li></ul>
     <ul><li><a href="notifications_management">Notifications Management</a></li></ul>
     <ul><li><a href="booking_management">Booking Management</a></li></ul>
     <ul><li><a href="private-gallery">Private Client Gallery</a></li></ul>
-    <ul><li><a href="enquiry_management">Enquiries & Inquiries</a></li></ul>
-    <ul><li><a href="blog_management">Blog Management</a></li></ul>
-    <ul><li><a href="coupons_management">Coupons & Discounts</a></li></ul>
-    <ul><li><a href="support_ticket_management">Support Tickets</a></li></ul>
+    <ul><li><a href="enquiry_management">Enquiry Management</a></li></ul>
+    
 
     <ul>
         <li>

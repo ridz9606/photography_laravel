@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Catalogue;
 
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CatalogueController extends Controller
@@ -62,10 +63,16 @@ class CatalogueController extends Controller
         return view('admin.catelogues_management', ['catalogue_arr'=>$data]);
     }
 
-    public function websiteCatalogues()
+    public function websiteCatalogues(Request $request)
     {
-        $catalogue = Catalogue::all();
-        return view('website.catalogues',  ['catalogue_arr'=>$catalogue]);
+    if ($request->has('id')) {
+        $catalogue_arr = Catalogue::where('category_id', $request->id)->get();
+    } else {
+        
+        $catalogue_arr = Catalogue::all();
+    }
+
+        return view('website.catalogues', ['catalogue_arr' => $catalogue_arr]);
     }
 
 

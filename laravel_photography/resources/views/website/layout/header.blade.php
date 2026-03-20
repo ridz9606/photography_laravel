@@ -32,7 +32,7 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
 <!-- Navbar Start -->
 <div class="container-fluid bg-light sticky-top shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light py-2">

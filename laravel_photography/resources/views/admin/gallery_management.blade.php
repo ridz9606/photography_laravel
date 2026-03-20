@@ -13,38 +13,29 @@
                 <thead class="bg-light">
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                        <th>Catalogue/Category</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th class="text-end pe-4">Action</th>
+                        <th>Catalogue</th>
+                        <th>Images</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     @isset($gallery_arr)
                         @foreach($gallery_arr as $value)
                         <tr>
-                            <td>{{ $value->gallery_id }}</td>
-                            <td class="fw-bold">{{ $value->image_title }}</td>
+                           <td>{{ $value->id }}</td>
+
+                            <td>{{ $value->catalogue_id }}</td>  <!-- ya relation se naam -->
+
                             <td>
-                                <img width="100px" src="{{ asset('admin/assets/images/gallery/' . $value->image) }}" class="img-fluid rounded border shadow-sm" alt="{{ $value->image_title }}">
+                                <img width="100px" 
+                                    src="{{ url('upload/gallery/'.$value->image) }}" 
+                                    class="img-fluid rounded border shadow-sm">
                             </td>
-                            <td>
-                                <span class="badge bg-light text-dark border">CAT #{{ $value->catalogue_id }}</span><br>
-                                <span class="badge bg-light text-dark border mt-1">CATE #{{ $value->category_id }}</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-{{ $value->status == 'active' ? 'success' : 'danger' }} rounded-pill">
-                                    {{ ucfirst($value->status) }}
-                                </span>
-                            </td>
-                            <td>{{ date('d M Y', strtotime($value->created_at)) }}</td>
                             <td class="text-end pe-4">
-                                <a href="{{ url('admin/edit_gallery?id=' . $value->gallery_id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 me-2">
-                                    <i class="fa fa-edit me-1"></i> Edit
+                                <a href="{{ url('/edit_gallery/'.$value->id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 me-2">
+                                    <i class="fa fa-edit"></i> Edit
                                 </a>
-                                <a href="{{ url('admin/delete_gallery/' . $value->gallery_id) }}" 
+                                <a href="{{ url('/delete_gallery/'.$value->id) }}" 
                                    onclick="return confirm('Are you sure?')" 
                                    class="btn btn-sm btn-outline-danger rounded-pill px-3">
                                     <i class="fa fa-trash me-1"></i> Delete

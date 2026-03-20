@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3">Manage Packages</h1>
-    <a href="{{ url('admin/add_packages') }}" class="btn btn-primary">Add Package</a>
+    <a href="add_packages" class="btn btn-primary">Add Package</a>
 </div>
 
 <div class="card shadow-sm border-0 rounded-4">
@@ -25,17 +25,17 @@
                     @isset($pack_arr)
                         @foreach($pack_arr as $value)
                         <tr>
-                            <td class="ps-4 text-start">{{ $value->package_id }}</td>
+                            <td class="ps-4 text-start">{{ $value->id }}</td>
                             <td class="text-start fw-bold">{{ $value->package_name }}</td>
                             <td>₹{{ number_format($value->price, 0) }}</td>
                             <td>{{ $value->max_catelogues }}</td>
                             <td class="text-muted small" style="max-width: 250px;">{{ Str::limit($value->description, 50) }}</td>
                             <td>{{ date('d M Y', strtotime($value->created_at)) }}</td>
                             <td class="text-end pe-4">
-                                <a href="{{ url('admin/edit_packages?id=' . $value->package_id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 me-2">
+                                <a href="{{ url('/edit_packages/' . $value->id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 me-2">
                                     <i class="fa fa-edit me-1"></i> Edit
                                 </a>
-                                <a href="{{ url('admin/delete_packages/' . $value->package_id) }}" 
+                                <a href="{{ url('/delete_packages/' . $value->id) }}" 
                                    onclick="return confirm('Are you sure?')" 
                                    class="btn btn-sm btn-outline-danger rounded-pill px-3">
                                     <i class="fa fa-trash me-1"></i> Delete

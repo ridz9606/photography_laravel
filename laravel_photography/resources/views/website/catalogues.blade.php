@@ -16,7 +16,7 @@
                     <div class="position-relative overflow-hidden">
                         <img src="{{ asset('upload/catalogues/' . $cat->image) }}" class="img-fluid w-100" style="height: 300px; object-fit: cover;" alt="{{ $cat->catalogue_name }}">
                         <div class="catalogue-overlay">
-                             <a href="{{ url('gallery?cat_id=' . $cat->id) }}" class="btn btn-outline-light px-3 py-2 me-2">Gallery</a>
+                             <a href="{{ url('gallery?catalogue_id=' . $cat->id) }}" class="btn btn-outline-light px-3 py-2 me-2">Gallery</a>
                              @if(request()->get('mode') == 'select')
                                 <a href="{{ url('booking?id=' . $cat->id . '&category_id=' . $cat->category_id) }}" class="btn btn-primary px-3 py-2">Select Theme</a>
                              @else

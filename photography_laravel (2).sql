@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 18, 2026 at 02:33 PM
+-- Generation Time: Mar 20, 2026 at 12:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,9 +93,10 @@ CREATE TABLE `blogs` (
 
 CREATE TABLE `bookings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `appointment_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `package_id` bigint(20) UNSIGNED NOT NULL,
+  `slot_id` bigint(20) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
   `advance_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
   `remaining_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -127,7 +128,7 @@ CREATE TABLE `catalogues` (
 --
 
 INSERT INTO `catalogues` (`id`, `category_id`, `catalogue_name`, `description`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Little Ms. Poser', 'Pure innocence wrapped in warmth, this newborn rests peacefully in a cozy, earthy setup. A timeless capture of love, softness, and new beginnings.', 'Little Ms. Poser.jpeg', 'active', '2026-03-17 02:50:53', '2026-03-17 04:46:24');
+(1, 2, 'Little Ms. Poser', '“Little Ms. Poser” is an adorable catalogue capturing kids’ playful poses and charming expressions. Each photo beautifully reflects innocence and creates timeless memories.', '1773903794_img.jpeg', 'active', '2026-03-19 01:33:14', '2026-03-19 01:33:14');
 
 -- --------------------------------------------------------
 
@@ -149,10 +150,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `category_image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Kids', 'kids.png', 'active', '2026-03-15 13:00:53', '2026-03-15 13:00:53'),
-(2, 'New Born', '1773582986_img.png', 'active', '2026-03-15 08:26:26', '2026-03-15 08:26:26'),
-(3, 'Maternity', '1773583244_img.png', 'active', '2026-03-15 08:30:44', '2026-03-15 08:30:44'),
-(4, 'Family', '1773583269_img.png', 'active', '2026-03-15 08:31:09', '2026-03-17 03:56:29');
+(1, 'New Born', '1773903603_img.png', 'active', '2026-03-19 01:30:03', '2026-03-19 01:30:03'),
+(2, 'Kids', '1773903636_img.png', 'active', '2026-03-19 01:30:36', '2026-03-19 01:30:36'),
+(3, 'Maternity', '1773903656_img.png', 'active', '2026-03-19 01:30:57', '2026-03-19 01:30:57'),
+(4, 'Family', '1773903678_img.png', 'active', '2026-03-19 01:31:18', '2026-03-19 01:31:18');
 
 -- --------------------------------------------------------
 
@@ -171,21 +172,21 @@ CREATE TABLE `clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `clients`
+-- Table structure for table `client_albums`
 --
 
-INSERT INTO `clients` (`id`, `name`, `email`, `phone`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Thalia Hilpert', 'misty.corwin@yahoo.com', '5337683232', '$2y$12$fRWqkclLWROWJ32XMp5j5ev5Eg/6Bgm4EdG8.mPFS1MtYJMjTDXHK', 'unblock', '2026-03-14 08:21:06', '2026-03-14 08:21:06'),
-(2, 'Prof. Pierre Gutkowski IV', 'erdman.dominic@wisoky.com', '9190876851', '$2y$12$ulLZj4L6NSTIWLqefjxskOXDnL/um6j/zQjp1U4pphyMvETWedzu.', 'unblock', '2026-03-14 08:21:07', '2026-03-14 08:21:07'),
-(3, 'Eden Schmeler MD', 'pouros.paris@hotmail.com', '5687693934', '$2y$12$6uP8Fi/TiZJ6FvdFYRx6rOn2IWrFULVmdjNRVLiUfflpY258S1hOy', 'unblock', '2026-03-14 08:21:07', '2026-03-14 08:21:07'),
-(4, 'Greyson Hill', 'isadore.bergstrom@hintz.com', '5953027414', '$2y$12$Eq3PsT2PH6b5dAk5NjW2tuzeA3Cscy0BnpkQDNEwSUgeIhv2bFuc2', 'unblock', '2026-03-14 08:21:07', '2026-03-14 08:21:07'),
-(5, 'Loraine Altenwerth', 'alex05@hotmail.com', '5778738641', '$2y$12$.pe43pzpvY2VLfWlmK5qB.smrdTCe4JArmDrRltEU1F/LwOZNJ6DG', 'unblock', '2026-03-14 08:21:08', '2026-03-14 08:21:08'),
-(6, 'Kelvin Christiansen MD', 'kamryn.denesik@hotmail.com', '4524616248', '$2y$12$O55qvkR7smUoFzBAy4vjfOj9C/q6FonGYAWD45W1sAZH1dnY9N9iG', 'unblock', '2026-03-14 08:21:08', '2026-03-14 08:21:08'),
-(7, 'Mrs. Yvette Heaney', 'mvandervort@hotmail.com', '5315931815', '$2y$12$mKEeE/5lxE83GFKnBIam1uTRflghHOdj2JChSTxUNbeLbKX4JxFDG', 'unblock', '2026-03-14 08:21:08', '2026-03-14 08:21:08'),
-(8, 'Dr. Edwina Kuvalis', 'sunny.lowe@wilderman.org', '4983584860', '$2y$12$DXV9nitiScE0VU594fpTdeqk1uy0bHzT88TxeUsh/dUQyrqNaX4my', 'unblock', '2026-03-14 08:21:09', '2026-03-14 08:21:09'),
-(9, 'Maritza Koepp', 'pink32@jakubowski.biz', '9908789615', '$2y$12$p1V6/RAgEHcaa7hclozWHOrv4wKZ.CJffDAqCEEgEidhOa1TMX7qK', 'unblock', '2026-03-14 08:21:09', '2026-03-14 08:21:09'),
-(10, 'Dr. Carlo Kulas', 'austen.bode@lubowitz.com', '2512170515', '$2y$12$aDBRs4jHgkzbJjmqQVz/MeGVER7rBjqP70Ri1cbPzu5j62EgIsrbu', 'unblock', '2026-03-14 08:21:09', '2026-03-14 08:21:09');
+CREATE TABLE `client_albums` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `album_name` varchar(100) NOT NULL,
+  `cover_image` varchar(255) NOT NULL,
+  `album_link` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -247,13 +248,25 @@ CREATE TABLE `enquiries` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `phone` varchar(15) NOT NULL,
   `subject` varchar(200) NOT NULL,
   `message` text NOT NULL,
   `status` enum('new','responded','closed') NOT NULL DEFAULT 'new',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `enquiries`
+--
+
+INSERT INTO `enquiries` (`id`, `name`, `email`, `subject`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Riddhi Gandharv', 'riddhigandharav@gmail.com', 'Kids', 'About themes', 'new', '2026-03-19 08:06:47', '2026-03-19 08:06:47'),
+(2, 'Riddhi Gandharv', 'riddhigandharav@gmail.com', 'Kids', 'About themes', 'new', '2026-03-19 08:07:51', '2026-03-19 08:07:51'),
+(3, 'Riddhi Gandharv', 'riddhigandharav@gmail.com', 'Kids', 'About themes', 'new', '2026-03-19 08:11:49', '2026-03-19 08:11:49'),
+(4, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I would like to enquire about a kids photoshoot.\r\nPlease share details about themes, pricing, and availability.”', 'new', '2026-03-19 08:18:37', '2026-03-19 08:18:37'),
+(5, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I would like to enquire about a kids photoshoot.\r\nPlease share details about themes, pricing, and availability.”', 'new', '2026-03-19 08:19:34', '2026-03-19 08:19:34'),
+(6, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I want to plan a photoshoot for my child.\r\nPlease let me know the available themes and charges.”', 'new', '2026-03-19 08:21:31', '2026-03-19 08:21:31'),
+(7, 'Tanisha Rana', 'tanvirana2316@gmail.com', 'Kids', '“I want to plan a photoshoot for my child.\r\nPlease let me know the available themes and charges.”', 'new', '2026-03-19 08:22:36', '2026-03-19 08:22:36');
 
 -- --------------------------------------------------------
 
@@ -311,14 +324,21 @@ CREATE TABLE `full_payments` (
 CREATE TABLE `galleries` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `catalogue_id` bigint(20) UNSIGNED NOT NULL,
-  `category_id` bigint(20) UNSIGNED NOT NULL,
-  `image_title` varchar(150) DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
   `status` enum('active','inactive') NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `catalogue_id`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, '177390587868.jpg', 'active', '2026-03-19 02:07:58', '2026-03-19 02:07:58'),
+(2, 1, '177390606482.jpg', 'active', '2026-03-19 02:11:04', '2026-03-19 02:11:04'),
+(3, 1, '177390606448.jpg', 'active', '2026-03-19 02:11:04', '2026-03-19 02:11:04'),
+(4, 1, '177390838432.jpg', 'active', '2026-03-19 02:11:04', '2026-03-19 02:49:44');
 
 -- --------------------------------------------------------
 
@@ -375,8 +395,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2026_03_13_070215_create_blogs_table', 1),
 (21, '2026_03_13_070215_create_coupons_table', 1),
 (22, '2026_03_13_070216_create_support_tickets_table', 1),
-(23, '2026_03_16_063154_create_contacts_table', 2),
-(24, '2026_03_16_063236_create_editors_table', 2);
+(23, '2026_03_16_063154_create_contacts_table', 1),
+(24, '2026_03_16_063236_create_editors_table', 1),
+(25, '2026_03_16_063431_create_assigned_tasks_table', 1),
+(26, '2026_03_16_063755_create_client_albums_table', 1),
+(27, '2026_03_20_101342_rename_appointment_id_to_client_id_in_bookings_table', 2);
 
 -- --------------------------------------------------------
 
@@ -409,6 +432,14 @@ CREATE TABLE `packages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`id`, `category_id`, `package_name`, `price`, `max_catelogues`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Mini Session', 4999.00, 1, 'Includes 1 theme\r\n30-minute session\r\n10 high-resolution edited images\r\nProps and accessories provided', '2026-03-19 23:20:04', '2026-03-19 23:44:10'),
+(2, 1, 'Silver Package', 9999.00, 3, '2 setups + parents\' portrait (plain background)\r\n15 high-resolution edited images\r\nIncludes a photobook\r\nProps and accessories provided\r\nAll raw photos included', '2026-03-19 23:29:16', '2026-03-19 23:29:16');
 
 -- --------------------------------------------------------
 
@@ -458,42 +489,6 @@ CREATE TABLE `photographers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `photographers`
---
-
-INSERT INTO `photographers` (`id`, `name`, `email`, `password`, `phone`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Tanmay Sharma', 'tanmay12@gmail.com', '$2y$12$ydRlNMG.op/jZjVcTDjJde5snZdHWvir40Jq7zhjYqHfV8VR83ehm', '9874563210', 'active', '2026-03-14 06:34:40', '2026-03-16 04:53:28'),
-(2, 'Alysson Veum', 'buford.legros@hermann.info', '$2y$12$8pi7WZ05gGD.p2SA7DzAieNmacNkOGSWgAdTHDUxX6d5haGOtG/e2', '9516281945', 'active', '2026-03-14 08:08:00', '2026-03-14 08:08:00'),
-(3, 'Broderick Gutkowski PhD', 'cremin.jamir@hotmail.com', '$2y$12$7LxKvrd2OkSozx.xFJ6Cxeldg/jAXMWTvkuA8ZaF2NacSaSv/gYQe', '2221947128', 'active', '2026-03-14 08:08:00', '2026-03-14 08:08:00'),
-(4, 'Dr. Jackeline Mante IV', 'dmaggio@hotmail.com', '$2y$12$llnmie8.t5sz4B..GfS8keXx3gUoKTZTGTEInoIovzpEV8kL.ibDu', '3144543130', 'active', '2026-03-14 08:08:01', '2026-03-14 08:08:01'),
-(5, 'Kris Kreiger Jr.', 'eulah80@vandervort.net', '$2y$12$nO6qY1dhsZpdKEbMk2T6r.8QyyVAXo0r9YSk5bcFybjWfR9YRTbi2', '9444811633', 'active', '2026-03-14 08:08:01', '2026-03-14 08:08:01'),
-(6, 'Dion Rutherford', 'goodwin.freeman@breitenberg.org', '$2y$12$ViwOSnkox4SMri1E/ovdMOY0L8Pk4bTJQmcbTnSQlZU2ld5ni2h8i', '2871911578', 'active', '2026-03-14 08:08:01', '2026-03-14 08:08:01'),
-(7, 'Baron Keebler', 'alyson.bernier@howell.com', '$2y$12$WzoX97WvsseFBzrJXXNCSuE3hGl0P/lXTL1epGAf4pzNnID4LscTe', '1767216234', 'active', '2026-03-14 08:08:02', '2026-03-14 08:08:02'),
-(8, 'Kiara Reynolds DVM', 'wgutmann@stark.com', '$2y$12$GOcfcOHOQS6H0szvMYZghObMh5zxJj3jLarCv12Jfu0FJkdI1RG4.', '9850247554', 'active', '2026-03-14 08:08:02', '2026-03-14 08:08:02'),
-(9, 'Dejah Jenkins', 'ewehner@gmail.com', '$2y$12$pGa40QrlwXQfwkoAsAA09O1mSQioCsieX4jk0fKzhEqdE0dTw7aoy', '3215494920', 'active', '2026-03-14 08:08:02', '2026-03-14 08:08:02'),
-(10, 'Wellington Jenkins', 'joesph82@gmail.com', '$2y$12$yp7fdNo.7RJUYQ5CHCp6yes4I8aKbvG5Yf4SBOhJAODtb1ZYF0DP.', '0385797934', 'active', '2026-03-14 08:08:03', '2026-03-14 08:08:03'),
-(11, 'Eulalia Flatley', 'rashad.grant@hotmail.com', '$2y$12$rGgIL7a7oF1MkBHhIMXr0e4siVCixaOogK.LGGvhYISTNfU6u0.ou', '7668356616', 'active', '2026-03-14 08:08:03', '2026-03-14 08:08:03'),
-(12, 'Isobel Schneider', 'gkutch@gmail.com', '$2y$12$W1xXaEm5JqFJxwILC4TJhOcq7kQufM/LxyxuJuaVgwNFvRp5kyiFW', '8759552808', 'active', '2026-03-14 08:19:53', '2026-03-14 08:19:53'),
-(13, 'Aditya Prosacco', 'haylie06@schaden.biz', '$2y$12$dYDhEeSIFD7NOXW339Ag1epsOnAmgos7gYWt2ICGmrvyfad7s8F/O', '8780385352', 'active', '2026-03-14 08:19:54', '2026-03-14 08:19:54'),
-(14, 'Ettie Pagac', 'bartell.hailee@yahoo.com', '$2y$12$r74lyw6aYWIj6wRlZXFbiuoZzxFgWirfz6pQDFpCijVIAKCHfQ9dK', '3717972797', 'active', '2026-03-14 08:19:54', '2026-03-14 08:19:54'),
-(15, 'Magali Lesch', 'germaine27@kshlerin.info', '$2y$12$rMw67sXfP/9CxI5nWpEXMe88ZFj93jJqaxzlKGSzLNHqEVnmnsVNK', '3902811188', 'active', '2026-03-14 08:19:54', '2026-03-14 08:19:54'),
-(16, 'Jeffery Jones', 'zemlak.heaven@dooley.com', '$2y$12$LcWW4RlDYpxuykPIOT0eD.6m/zQ8nabl7mDHPja0ExFErGF3EzmpC', '7935336383', 'active', '2026-03-14 08:19:55', '2026-03-14 08:19:55'),
-(17, 'Maye Lakin', 'opal68@rowe.com', '$2y$12$x5yIb0SEHbuMeYfPNgAvTOb5U0pPpdLjozfCvzj75Z9FUDcbC6jY2', '4740778455', 'active', '2026-03-14 08:19:55', '2026-03-14 08:19:55'),
-(18, 'Juanita Rau', 'maximillian70@hotmail.com', '$2y$12$cbOeMQml7np3tASI9DzzCOvgH42eBWAXMRn.TtT0f91spoEpJhRkC', '1095321158', 'active', '2026-03-14 08:19:55', '2026-03-14 08:19:55'),
-(19, 'Mr. Triston Zulauf III', 'tmosciski@collier.net', '$2y$12$ork9AQHW38TDMjqLEcLNgOQ77veUhJ3nwodGxCr8f/QRRTm7oDJ/i', '3595882085', 'active', '2026-03-14 08:19:56', '2026-03-14 08:19:56'),
-(20, 'Aylin Dicki', 'sipes.edyth@hotmail.com', '$2y$12$JQuLEJC9m7pIMttxe2ccsOgnDuOVjzcwBx2k868NwX780PC/DxoM.', '4073329279', 'active', '2026-03-14 08:19:56', '2026-03-14 08:19:56'),
-(21, 'Prof. Darien Batz', 'soconnell@yahoo.com', '$2y$12$R3waAx6BZUtVdZOWB65tYOukd3AieBxtC29yENaw40ONXS4pdIBOK', '8304021667', 'active', '2026-03-14 08:19:56', '2026-03-14 08:19:56'),
-(22, 'Miss Bianka Parisian III', 'bailey81@schmitt.net', '$2y$12$xO0OgMCR1r5fyxv7AeLVa.v.iLGPRyqvoRAsHxPGeD29o/vqbuT7a', '1208802395', 'active', '2026-03-14 08:21:03', '2026-03-14 08:21:03'),
-(23, 'Kianna Harvey', 'imarvin@bailey.com', '$2y$12$Ye5JJRtqZqpN4k1LfhOA1uv6A/0womvZqhnqRlmbKN0K91G.DJrcC', '6729025193', 'active', '2026-03-14 08:21:04', '2026-03-14 08:21:04'),
-(24, 'June Bednar', 'hansen.tania@lind.com', '$2y$12$Ob33zTtgngZ96P7MD2wbIe/pQpOz7M/IctCZE1EZGSA1QWxsvqGIK', '6762585499', 'active', '2026-03-14 08:21:04', '2026-03-14 08:21:04'),
-(25, 'Edythe McDermott', 'danielle.luettgen@gmail.com', '$2y$12$ffguFAoBE6t87id86DaU8.29H.jDX02YoDMy4vBrFSgdaMI/XgHn2', '5485794085', 'active', '2026-03-14 08:21:04', '2026-03-14 08:21:04'),
-(26, 'Prof. Bonita Crona', 'yadira.flatley@gmail.com', '$2y$12$BSCZR67j4G4Vwo8OCPHzUerVFS1nTtQpBsyUDqqu.XTRs1q8r6Lky', '4414551132', 'active', '2026-03-14 08:21:05', '2026-03-14 08:21:05'),
-(27, 'Alison Gerlach IV', 'letha.abbott@hotmail.com', '$2y$12$OVgGhEVjTH1IOahNSSK3qODUOx50Aau.AYlI/jSBz4/wC1yM9w8MO', '5809282781', 'active', '2026-03-14 08:21:05', '2026-03-14 08:21:05'),
-(28, 'Rollin Witting', 'kerluke.leatha@yahoo.com', '$2y$12$DhKmuPZUAnD2g6oz..p6uePNKcduJG5tls0C20Xclu0gkClMZeVZ6', '1515416555', 'active', '2026-03-14 08:21:05', '2026-03-14 08:21:05'),
-(29, 'Nedra Champlin', 'reynolds.mathilde@barton.com', '$2y$12$/QH1Jc0.7YQAziH5lKI/3.ByabhlSgxmBs6lbUKBEJE17Lw.MfBAC', '2929992269', 'active', '2026-03-14 08:21:06', '2026-03-14 08:21:06'),
-(30, 'Jaden Emmerich', 'martine07@gmail.com', '$2y$12$MS77xJ3gc.mOtdPsgeSpfuAoVMmd6jh4FywH/qHuOgEMUSKOUphT6', '3425068254', 'active', '2026-03-14 08:21:06', '2026-03-14 08:21:06');
-
 -- --------------------------------------------------------
 
 --
@@ -509,13 +504,6 @@ CREATE TABLE `slots` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `slots`
---
-
-INSERT INTO `slots` (`id`, `slot_name`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Morning', '10:00:00', '12:00:00', 'active', '2026-03-17 05:56:01', '2026-03-17 06:09:55');
 
 -- --------------------------------------------------------
 
@@ -575,7 +563,8 @@ ALTER TABLE `appointments`
 --
 ALTER TABLE `assigned_tasks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `assigned_tasks_editor_id_foreign` (`editor_id`);
+  ADD KEY `assigned_tasks_editor_id_foreign` (`editor_id`),
+  ADD KEY `assigned_tasks_booking_id_foreign` (`booking_id`);
 
 --
 -- Indexes for table `blogs`
@@ -588,9 +577,9 @@ ALTER TABLE `blogs`
 --
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `bookings_appointment_id_foreign` (`appointment_id`),
   ADD KEY `bookings_category_id_foreign` (`category_id`),
-  ADD KEY `bookings_package_id_foreign` (`package_id`);
+  ADD KEY `bookings_package_id_foreign` (`package_id`),
+  ADD KEY `bookings_client_id_foreign` (`client_id`);
 
 --
 -- Indexes for table `catalogues`
@@ -611,6 +600,13 @@ ALTER TABLE `categories`
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `clients_email_unique` (`email`);
+
+--
+-- Indexes for table `client_albums`
+--
+ALTER TABLE `client_albums`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `client_albums_client_id_foreign` (`client_id`);
 
 --
 -- Indexes for table `contacts`
@@ -664,8 +660,7 @@ ALTER TABLE `full_payments`
 --
 ALTER TABLE `galleries`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `galleries_catalogue_id_foreign` (`catalogue_id`),
-  ADD KEY `galleries_category_id_foreign` (`category_id`);
+  ADD KEY `galleries_catalogue_id_foreign` (`catalogue_id`);
 
 --
 -- Indexes for table `invoices`
@@ -774,19 +769,25 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `catalogues`
 --
 ALTER TABLE `catalogues`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `client_albums`
+--
+ALTER TABLE `client_albums`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -810,7 +811,7 @@ ALTER TABLE `editors`
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -834,7 +835,7 @@ ALTER TABLE `full_payments`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `invoices`
@@ -846,7 +847,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -858,7 +859,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -870,13 +871,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `photographers`
 --
 ALTER TABLE `photographers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `slots`
 --
 ALTER TABLE `slots`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `support_tickets`
@@ -911,14 +912,15 @@ ALTER TABLE `appointments`
 -- Constraints for table `assigned_tasks`
 --
 ALTER TABLE `assigned_tasks`
+  ADD CONSTRAINT `assigned_tasks_booking_id_foreign` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`),
   ADD CONSTRAINT `assigned_tasks_editor_id_foreign` FOREIGN KEY (`editor_id`) REFERENCES `editors` (`id`);
 
 --
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_appointment_id_foreign` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`id`),
   ADD CONSTRAINT `bookings_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `bookings_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
   ADD CONSTRAINT `bookings_package_id_foreign` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`);
 
 --
@@ -926,6 +928,12 @@ ALTER TABLE `bookings`
 --
 ALTER TABLE `catalogues`
   ADD CONSTRAINT `catalogues_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Constraints for table `client_albums`
+--
+ALTER TABLE `client_albums`
+  ADD CONSTRAINT `client_albums_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
 
 --
 -- Constraints for table `feedback`
@@ -943,8 +951,7 @@ ALTER TABLE `full_payments`
 -- Constraints for table `galleries`
 --
 ALTER TABLE `galleries`
-  ADD CONSTRAINT `galleries_catalogue_id_foreign` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `galleries_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `galleries_catalogue_id_foreign` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `invoices`

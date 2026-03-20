@@ -49,14 +49,14 @@ Route::get('/catalogues', [CatalogueController::class, 'websiteCatalogues']);
 
 Route::get('/categories', [CategoryController::class, 'websiteCategories']);
 
-Route::get('/contact', function () {
-    return view('website.contact');
-});
+Route::get('/contact', [EnquiryController::class, 'create']);
+Route::post('/contact', [EnquiryController::class, 'store']);
 
 Route::get('/edit_profile', function () {
     return view('website.edit_profile');
 });
 
+Route::get('/gallery', [GalleryController::class, 'websiteGallery']);
 
 
 Route::get('/invoice', function () {
@@ -75,9 +75,7 @@ Route::get('/notifications', function () {
     return view('website.notifications');
 });
 
-Route::get('/packages', function () {
-    return view('website.packages');
-});
+Route::get('/packages', [PackageController::class, 'show_package']);
 
 Route::get('/payment-confirm', function () {
     return view('website.payment-confirm');
@@ -173,9 +171,10 @@ Route::get('delete_catalogue/{id}', [CatalogueController::class, 'destroy']);
 
 Route::get('/client_management', [ClientController::class, 'show']);
 
-Route::get('/enquiry_management', function () {
-    return view('admin.enquiry_management');
-});
+Route::get('/enquiry_management', [EnquiryController::class, 'show']);
+
+Route::get('/send-mail',[EnquiryController::class,'sendmail']);
+
 
 Route::get('/feedback_management', function () {
     return view('admin.feedback_management');
@@ -199,10 +198,10 @@ Route::get('/notifications_management', function () {
 });
 
 Route::get('/package_management', [PackageController::class, 'show']);
-Route::get('add_package', [PackageController::class, 'create']);
-Route::post('add_package', [PackageController::class, 'store']);
-Route::get('edit_package/{id}', [PackageController::class, 'edit']);
-Route::post('edit_package/{id}', [PackageController::class, 'update']);
+Route::get('add_packages', [PackageController::class, 'create']);
+Route::post('add_packages', [PackageController::class, 'store']);
+Route::get('edit_packages/{id}', [PackageController::class, 'edit']);
+Route::post('edit_packages/{id}', [PackageController::class, 'update']);
 Route::get('delete_package/{id}', [PackageController::class, 'destroy']);
 
 Route::get('/slot_management', [SlotController::class, 'show']);

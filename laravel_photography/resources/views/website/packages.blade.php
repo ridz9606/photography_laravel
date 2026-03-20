@@ -82,33 +82,30 @@
     </div>
 
     <!-- Packages Grid -->
-    @isset($categories)
-        @foreach($categories as $index => $cat)
-            <div class="cat-section {{ $index == 0 ? 'active' : '' }}" id="cat-{{ $cat->category_id }}">
-                <div class="row g-4">
-                    @isset($cat->packages)
-                        @foreach($cat->packages as $p)
+                    <div class="row g-4">
+                    @isset($pack_arr)
+                        @foreach($pack_arr as $value)
                             <div class="col-lg-4 col-md-6">
                                 <div class="price-card">
-                                    <h3>{{ $p->package_name }}</h3>
-                                    <div class="price">₹{{ number_format($p->price, 0) }} <span>/ Session</span></div>
+                                    <h3>{{ $value->package_name }}</h3>
+                                    <div class="price">₹{{ number_format($value->price, 0) }} <span>/ Session</span></div>
                                     <ul>
                                         @php
-                                            $features = explode("\n", $p->description);
+                                            $features = explode("\n", $value->description);
                                         @endphp
                                         @foreach($features as $feature)
                                             @if(trim($feature))
                                                 <li>{{ trim($feature) }}</li>
                                             @endif
                                         @endforeach
-                                        <li>Max Themes: {{ $p->max_catelogues }}</li>
+                                        <li>Max Themes: {{ $value->max_catelogues }}</li>
                                     </ul>
-                                    <a href="{{ url('booking?package_id=' . $p->package_id . '&category_id=' . $cat->category_id) }}" class="btn btn-book text-center">Book This Plan</a>
+                                    <a href="{{ url('booking?id=' . $value->id) }}" class="btn btn-book text-center">Book This Plan</a>
                                 </div>
                             </div>
                         @endforeach
                         
-                        @if(count($cat->packages) == 0)
+                        @if(count($pack_arr) == 0)
                             <div class="col-12 text-center py-5">
                                 <p class="text-muted">No packages available for this category yet.</p>
                             </div>
@@ -120,8 +117,7 @@
                     @endisset
                 </div>
             </div>
-        @endforeach
-    @endisset
+       
 </div>
 
 <script>

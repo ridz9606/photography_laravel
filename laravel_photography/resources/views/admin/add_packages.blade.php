@@ -1,7 +1,5 @@
-<?php
-include('header.php');
-include('sidebar.php');
-?>
+@extends('admin.layout.structure')
+@section('content')
 
 <main class="col-md-10 ms-sm-auto px-4">
 
@@ -11,19 +9,21 @@ include('sidebar.php');
 
                 <h3 class="mb-3">Add Package</h3>
 
-                <form method="post">
+                <form method="post" action="{{ url('/add_packages') }}" enctype="multipart/form-data">
+                    @csrf
   <div class="mb-3">
         <label class="form-label">Select Category</label>
         <select name="category_id" class="form-control" required>
-            <option value="">-- Select Category --</option>
+    <option value="">-- Select Category --</option>
 
-            <?php foreach($cate_arr as $cat) { ?>
-                <option value="<?= $cat->category_id ?>">
-                    <?= $cat->category_name ?>
-                </option>
-            <?php } ?>
-        </select>
-    </div>
+    @foreach($cate_arr as $cat)
+        <option value="{{ $cat->id }}">
+            {{ $cat->category_name }}
+        </option>
+    @endforeach
+
+</select>    
+</div>
 
                     <div class="mb-3">
                         <label class="form-label">Package Name</label>
@@ -35,23 +35,12 @@ include('sidebar.php');
                         <input type="number" name="price" class="form-control" required>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Duration (Hours)</label>
-                            <input type="number" name="hours" class="form-control" placeholder="e.g. 2">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Edited Photos</label>
-                            <input type="number" name="photos_count" class="form-control" placeholder="e.g. 15">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Album Included?</label>
-                            <select name="album_included" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Maximum Catalogues</label>
+                        <input type="number" name="max_catelogues" class="form-control" placeholder="e.g. 3">
                     </div>
+
+                   
 
                     <div class="mb-3">
                         <label class="form-label">Description</label>

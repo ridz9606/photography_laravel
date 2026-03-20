@@ -16,10 +16,8 @@
                     @forelse($gallery_arr as $value)
                     <div class="scroll-item">
                         <div class="gallery-card">
-                            <img src="{{ asset('admin/images/gallery/' . $value->image) }}" alt="{{ $value->image_title }}">
-                            <div class="gallery-info">
-                                <h5>{{ $value->image_title }}</h5>
-                            </div>
+                            <img src="{{ url('upload/gallery/' . $value->image) }}" alt="">
+                           
                         </div>
                     </div>
                     @empty

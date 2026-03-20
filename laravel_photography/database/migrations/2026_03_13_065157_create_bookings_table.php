@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('appointment_id')->constrained('appointments', 'id');
+            $table->foreignId('client_id')->constrained('clients', 'id');
             $table->foreignId('category_id')->constrained('categories', 'id');
             $table->foreignId('package_id')->constrained('packages', 'id');
+            $table->foreignId('slot_id')->constrained('slots', 'id');
+            $table->date('appointment_date');
             $table->decimal('total_amount', 10, 2);
             $table->decimal('advance_amount', 10, 2)->default(0.00);
             $table->decimal('remaining_amount', 10, 2)->default(0.00);

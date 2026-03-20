@@ -16,10 +16,10 @@
                     <h2 class="mt-4">{{ $value->category_name }}</h2>
 
                     <div class="category-btns">
-                        <a href="{{ url('cataloges?catelogue_id=' . $value->id) }}" class="btn btn-primary btn-sm">View Catalogues</a>
+                        <a href="{{ url('catalogues?id=' . $value->id) }}" class="btn btn-primary btn-sm">View Catalogues</a>
                     </div>
                     <div>
-                        <a href="{{ url('packages') }}" class="btn btn-primary btn-sm">View Packages</a>
+                        <a href="{{ url('packages?id=' . $value->id) }}" class="btn btn-primary btn-sm">View Packages</a>
                     </div>
                 </div>
             </div>

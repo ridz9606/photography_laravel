@@ -1,7 +1,5 @@
-<?php
-include('header.php');
-include('sidebar.php');
-?>
+@extends('admin.layout.structure')
+@section('content')
 
 <main class="col-md-10 ms-sm-auto px-4">
 
@@ -11,21 +9,10 @@ include('sidebar.php');
 
                 <h3 class="mb-3">Edit Package</h3>
 
-                <form method="post">
-
+                <form method="post" action="{{ url('/edit_packages/' . $package->id) }}" enctype="multipart/form-data">
+@csrf
                     <!-- CATEGORY -->
-                    <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <select name="category_id" class="form-control" required>
-                            <option value="">-- Select Category --</option>
-                            <?php foreach($cate_arr as $cat) { ?>
-                                <option value="<?= $cat->category_id ?>"
-                                    <?php if($cat->category_id == $package->category_id) echo "selected"; ?>>
-                                    <?= $cat->category_name ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
+                   
 
                     <!-- PACKAGE NAME -->
                     <div class="mb-3">
@@ -43,24 +30,15 @@ include('sidebar.php');
                                class="form-control" required>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Duration (Hours)</label>
-                            <input type="number" name="hours" value="<?= $package->hours ?>" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Edited Photos</label>
-                            <input type="number" name="photos_count" value="<?= $package->photos_count ?>" class="form-control">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Album Included?</label>
-                            <select name="album_included" class="form-control">
-                                <option value="0" <?= ($package->album_included == 0) ? 'selected' : '' ?>>No</option>
-                                <option value="1" <?= ($package->album_included == 1) ? 'selected' : '' ?>>Yes</option>
-                            </select>
-                        </div>
-                    </div>
+                    <!-- MAX CATALOGUES -->
+                    <div class="mb-3">
+                        <label class="form-label">Maximum Catalogues</label>
+                        <input type="number" name="max_catelogues"  
+                               value="<?= $package->max_catelogues ?>"
+                               class="form-control" >
+                    </div>   
 
+                    
                     <!-- DESCRIPTION -->
                     <div class="mb-3">
                         <label class="form-label">Description</label>

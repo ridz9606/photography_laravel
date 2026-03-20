@@ -5,7 +5,7 @@
 
             <!-- Left Logo & Tagline -->
             <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
-                <img src="{{ asset('website/img/image1.png') }}" alt="Photography By Monali" class="footer-logo mb-3">
+                <img src="{{ asset('website/img/logo.png') }}" alt="Photography By Monali" class="footer-logo mb-3">
                 <p class="footer-tagline">CAPTURING THE ESSENCE OF NEW LIFE</p>
                 <p class="footer-services">
                     Maternity | Newborn | Kids | Family
@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-12 text-center">
                <!-- Footer Logo -->
-<img src="{{ asset('website/img/image1.png') }}" alt="Photography By Monali" class="footer-logo">
+<img src="{{ asset('website/img/logo.png') }}" alt="Photography By Monali" class="footer-logo">
 
 <!-- Footer Bottom Logo -->
 

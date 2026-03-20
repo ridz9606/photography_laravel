@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('catalogue_id')->constrained('catalogues', 'id')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories', 'id')->onDelete('cascade');
-            $table->string('image_title', 150)->nullable();
             $table->string('image', 255);
-            $table->text('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

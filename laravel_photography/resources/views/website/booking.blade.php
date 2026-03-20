@@ -285,16 +285,7 @@
                     </div>
 
                     <!-- 7. Discount / Coupon -->
-                    <div class="mb-4">
-                        <label class="form-label fw-bold small text-muted">HAVE A COUPON?</label>
-                        <div class="input-group">
-                            <input type="text" name="coupon_code" id="coupon_code" class="form-control form-control-sm shadow-sm border-0" placeholder="Enter coupon code">
-                            <button class="btn btn-outline-primary btn-sm px-4" type="button" onclick="applyCoupon()">Apply</button>
-                        </div>
-                        <div id="coupon-msg" class="small mt-1"></div>
-                        <input type="hidden" name="applied_coupon_id" id="applied_coupon_id">
-                    </div>
-
+                    
                     <!-- 8. Terms and Conditions -->
                     <div class="mb-4 bg-light p-3 rounded-3 border">
                         <div class="form-check">
