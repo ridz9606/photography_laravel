@@ -63,9 +63,17 @@ Route::get('/invoice', function () {
     return view('website.invoice');
 });
 
-Route::get('/login', function () {
-    return view('website.login');
+Route::get('/login',[ClientController::class,'login']);
+Route::post('/login_auth',[ClientController::class,'login_auth']);
+Route::get('/logout',[ClientController::class,'logout']);
+
+
+Route::get('/forgot-password', function () {
+    return view('website.forgot_password');
 });
+
+Route::post('/forgot/send-otp', [AuthController::class, 'sendForgotOtp']);
+Route::post('/forgot/reset', [AuthController::class, 'resetPassword']);
 
 Route::get('/mybooking', function () {
     return view('website.mybooking');
@@ -97,9 +105,10 @@ Route::get('/profile', function () {
     return view('website.profile');
 });
 
-Route::get('/registration', function () {
-    return view('website.registration');
-});
+Route::get('/registration', [ClientController::class, 'create']);
+Route::post('/registration', [ClientController::class, 'store']);
+
+
 
 Route::get('/submit-review', function () {
     return view('website.submit-review');

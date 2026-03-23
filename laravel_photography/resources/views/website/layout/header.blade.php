@@ -75,41 +75,33 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
 
-                <!-- ✅ RIGHT SIDE AUTH SECTION -->
-                <div class="d-flex align-items-center auth-section">
-
-                    <?php if (isset($_SESSION['client_id'])) { 
-                        // Fetch unread notifications count
-                        $client_id = $_SESSION['client_id'];
-                        $notif_res = $this->select_where('notifications', ['client_id' => $client_id, 'is_read' => 'no']);
-                        $notif_count = $notif_res->num_rows;
-                    ?>
+               
 
                         <!-- Notifications -->
-                        <a href="notifications" class="position-relative me-4 text-dark fs-5" title="Notifications">
-                            <i class="bi bi-bell"></i>
-                            <?php if($notif_count > 0) { ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px; padding: 4px 6px;">
-                                    <?= $notif_count ?>
-                                </span>
-                            <?php } ?>
-                        </a>
+                       
+<div class="d-flex align-items-center">
 
-                        <a href="profile" class="me-3 fw-bold text-dark text-decoration-none user-greeting">
-                            <i class="bi bi-person-circle me-1"></i> Hi, <?= htmlspecialchars($_SESSION['name']); ?>
-                        </a>
+    @if(session()->has('client_id'))
 
-                        <a href="logout" class="btn btn-primary px-4">
-                            Logout
-                        </a>
+        <!-- Logged In -->
+        <br><span class="me-3">Hi, {{ session('client_name') }}</span>
 
-                    <?php } else { ?>
+        <a href="{{ url('/logout') }}" class="btn btn-primary">Logout</a>
 
-                        <!-- BEFORE LOGIN -->
-                        <button onclick="window.location='{{ url('/login') }}'" class="btn btn-primary me-2 px-4">Login</button>
-                        <button onclick="window.location='{{ url('/registration') }}'" class="btn btn-primary px-4">Register</button>
+    @else
 
-                    <?php } ?>
+        @if(session()->has('has_logged_in'))
+            <!-- Logout ke baad -->
+            <a href="{{ url('/login') }}" class="btn btn-primary">Login</a>
+        @else
+            <!-- First time user -->
+            <a href="{{ url('/login') }}" class="btn btn-primary me-2">Login</a>
+            <a href="{{ url('/registration') }}" class="btn btn-primary">Register</a>
+        @endif
+
+    @endif
+
+</div>                    
 
                 </div>
             </div>

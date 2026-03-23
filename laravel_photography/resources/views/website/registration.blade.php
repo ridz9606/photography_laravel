@@ -54,43 +54,53 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
     <div class="card register-card p-5 text-center" style="max-width:480px; width:100%;">
 
-        <img src="{{ asset('website/img/image1.png') }}" style="width:140px;" class="mx-auto mb-3">
+        <img src="{{ asset('website/img/logo.png') }}" style="width:140px;" class="mx-auto mb-3">
         <h3 class="brand-text mb-3">Join Us</h3>
         <p class="text-muted mb-4">Capture your beautiful moments with us</p>
 
-        <form method="post" action="{{ url('/registration') }}">
-            @csrf
-            <div class="row">
-                <div class="col-md-12 mb-3 text-start">
-                    <label class="form-label ms-1">Full Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="John Doe" required>
-                </div>
-                
-                <div class="col-md-12 mb-3 text-start">
-                    <label class="form-label ms-1">Email Address</label>
-                    <input type="email" name="email" class="form-control" placeholder="john@example.com" required>
-                </div>
+       <form method="POST" action="/signup/verify">
+    @csrf
 
-                <div class="col-md-12 mb-3 text-start">
-                    <label class="form-label ms-1">Phone Number</label>
-                    <input type="text" name="phone" class="form-control" placeholder="+91 9876543210" required>
-                </div>
+    <div class="mb-3 text-start">
+        <label>Full Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
 
-                <div class="col-md-12 mb-4 text-start">
-                    <label class="form-label ms-1">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
-                </div>
-            </div>
+    <div class="mb-3 text-start">
+        <label>Email</label>
+        <input type="email" name="email" id="reg_email" class="form-control" required>
+    </div>
 
-            <button type="submit" name="submit" class="btn btn-primary w-100 mb-3">
-                Create My Account
-            </button>
-        </form>
+    <div class="mb-3 text-start">
+        <label>Phone</label>
+        <input type="text" name="phone" id="reg_phone" class="form-control" required>
+    </div>
 
+    <!-- Send OTP -->
+    <button type="button" onclick="sendSignupOtp()" class="btn btn-outline-dark w-100 mb-3">
+        Send OTP
+    </button>
+
+    <!-- OTP Input -->
+    <div class="mb-3 text-start">
+        <label>Enter OTP</label>
+        <input type="text" name="otp" id="reg_otp" class="form-control">
+    </div>
+
+    <div class="mb-3 text-start">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        Verify & Create Account
+    </button>
+</form>
         <p class="mt-2 mb-0">
             Already have an account? <button onclick="window.location='{{ url('login') }}'" class="btn btn-link fw-bold p-0 text-decoration-none" style="color: #E7B894;">Login Now</button>
         </p>
@@ -98,5 +108,29 @@
     </div>
 </div>
 
+
+<script>
+function sendSignupOtp() {
+    let phone = document.getElementById('reg_phone').value;
+
+    if (!phone) {
+        Swal.fire('Error', 'Enter phone first', 'error');
+        return;
+    }
+
+    fetch('/signup/send-otp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ phone: phone })
+    })
+    .then(res => res.json())
+    .then(data => {
+        Swal.fire('Success', 'OTP Sent Successfully', 'success');
+    });
+}
+</script>
 </body>
 </html>

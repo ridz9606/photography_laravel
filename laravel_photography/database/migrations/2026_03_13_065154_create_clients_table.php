@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email', 100)->nullable()->unique();
             $table->string('phone', 15)->nullable();
             $table->string('password', 255);
-            $table->enum('status', ['block', 'unblock'])->default('unblock');
+            $table->enum('status', ['unblock', 'block'])->default('unblock');
             $table->timestamps();
         });
     }

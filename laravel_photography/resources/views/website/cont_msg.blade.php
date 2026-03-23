@@ -9,4 +9,4 @@
 <br>
 
 <p>Regards,</p>
-<p>Explorist Agency</p>
+<p> Photography By Monali </p>

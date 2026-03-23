@@ -28,8 +28,7 @@
                         <th>Email</th>
                         <th>Contact Info</th>
                         
-                        
-                        <th>Status</th>
+                
                         
                         
                     </tr>
