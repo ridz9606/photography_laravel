@@ -1,0 +1,1 @@
+@extends('editor.layout.structure') @section('content') <h3>My Tasks</h3> @endsection

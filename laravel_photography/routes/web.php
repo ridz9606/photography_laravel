@@ -17,6 +17,12 @@ use App\Http\Controllers\SupportTicketController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdvancePaymentController;
 use App\Http\Controllers\FullPaymentController;
+use App\Http\Controllers\PhotographerDashboardController;
+use App\Http\Controllers\EditorDashboardController;
+use App\Http\Controllers\PhotographerLoginController;
+use App\Http\Controllers\EditorController;
+use App\Http\Controllers\AssignedTaskController;
+
 
 //----Website Routes----//
 
@@ -136,13 +142,26 @@ Route::get('/dashboard', function () {
 
 Route::get('add_photographer', [PhotographerController::class, 'create']);
 Route::post('add_photographer', [PhotographerController::class, 'store']);
-
 Route::get('edit_photographer/{id}', [PhotographerController::class, 'edit']);
 Route::post('edit_photographer/{id}', [PhotographerController::class, 'update']);
-
-
 Route::get('/photographer_management', [PhotographerController::class, 'show']);
 Route::get('delete_photographer/{id}', [PhotographerController::class, 'destroy']);
+Route::post('admin/assign_photographer', [PhotographerController::class, 'assignPhotographer']);
+
+Route::get('add_editor', [EditorController::class, 'create']);
+Route::post('add_editor', [EditorController::class, 'store']);
+Route::get('/editor_management', [EditorController::class, 'show']);
+Route::get('edit_editor/{id}', [EditorController::class, 'edit']);
+Route::post('edit_editor/{id}', [EditorController::class, 'update']);
+Route::get('delete_editor/{id}', [EditorController::class, 'destroy']);
+
+Route::get('add_assigned_task', [AssignedTaskController::class, 'create']);
+Route::post('add_assigned_task', [AssignedTaskController::class, 'store']);
+Route::get('/assigned_tasks_management', [AssignedTaskController::class, 'show']);
+Route::get('edit_assigned_task/{id}', [AssignedTaskController::class, 'edit']);
+Route::post('edit_assigned_task/{id}', [AssignedTaskController::class, 'update']);
+Route::get('delete_assigned_task/{id}', [AssignedTaskController::class, 'destroy']);
+
 
 
 Route::get('/appointments_management', function () {
@@ -159,10 +178,8 @@ Route::get('/booking_management', function () {
 
 Route::get('add_categories', [CategoryController::class, 'create']);
 Route::post('add_categories', [CategoryController::class, 'store']);
-
 Route::get('edit_categories/{id}', [CategoryController::class, 'edit']);
 Route::post('edit_categories/{id}', [CategoryController::class, 'update']);
-
 Route::get('/categories_management', [CategoryController::class, 'show']);
 Route::get('delete_category/{id}', [CategoryController::class, 'destroy']);
 
@@ -170,10 +187,8 @@ Route::get('delete_category/{id}', [CategoryController::class, 'destroy']);
 
 Route::get('add_catalogues', [CatalogueController::class, 'create']);
 Route::post('add_catalogues', [CatalogueController::class, 'store']);
-
 Route::get('edit_catalogues/{id}', [CatalogueController::class, 'edit']);
 Route::post('edit_catalogues/{id}', [CatalogueController::class, 'update']);
-
 Route::get('/catelogues_management', [CatalogueController::class, 'show']);
 Route::get('delete_catalogue/{id}', [CatalogueController::class, 'destroy']);
 
@@ -191,10 +206,8 @@ Route::get('/feedback_management', function () {
 
 Route::get('add_gallery', [GalleryController::class, 'create']);
 Route::post('add_gallery', [GalleryController::class, 'store']);
-
 Route::get('/gallery_management', [GalleryController::class, 'show']);
 Route::get('delete_gallery/{id}', [GalleryController::class, 'destroy']);
-
 Route::get('edit_gallery/{id}', [GalleryController::class, 'edit']);
 Route::post('edit_gallery/{id}', [GalleryController::class, 'update']);
 
@@ -240,16 +253,51 @@ Route::get('/full_payment', function () {
     return view('admin.full_payment');
 });
 
-Route::get('/feedback_management', function () {
-    return view('admin.feedback_management');
+//----Photographer Routes----//
+Route::get('photographer/login', [PhotographerLoginController::class, 'login']);
+Route::post('photographer/login', [PhotographerLoginController::class, 'loginVerify']);
+Route::get('photographer/logout', [PhotographerLoginController::class, 'logout']);
+
+Route::prefix('photographer')->group(function () {
+    Route::get('/dashboard', [PhotographerDashboardController::class, 'index']);
+    Route::get('/bookings', [PhotographerDashboardController::class, 'bookings']);
+    Route::get('/gallery', [PhotographerDashboardController::class, 'gallery']);
+    Route::get('/slots', [PhotographerDashboardController::class, 'slots']);
+    Route::get('/private-gallery', [PhotographerDashboardController::class, 'private_gallery']);
+    Route::get('/notifications', [PhotographerDashboardController::class, 'notifications']);
+    Route::get('/feedback', [PhotographerDashboardController::class, 'feedback']);
+
+    // Admin-shared routes for photographer 
+    Route::get('gallery_management', [GalleryController::class, 'show']);
+    Route::get('add_gallery', [GalleryController::class, 'create']);
+    Route::post('add_gallery', [GalleryController::class, 'store']);
+    Route::get('edit_gallery/{id}', [GalleryController::class, 'edit']);
+    Route::post('edit_gallery/{id}', [GalleryController::class, 'update']);
+    Route::get('delete_gallery/{id}', [GalleryController::class, 'destroy']);
 });
 
-Route::get('/feedback_management', function () {
-    return view('admin.feedback_management');
-});
+//----Editor Routes----//
+Route::prefix('editor')->group(function () {
+    Route::get('/dashboard', [EditorDashboardController::class, 'index']);
+    Route::get('/tasks', [EditorDashboardController::class, 'tasks']);
+    Route::get('/gallery', [EditorDashboardController::class, 'gallery']);
+    Route::get('/notifications', [EditorDashboardController::class, 'notifications']);
 
-Route::get('/feedback_management', function () {
-    return view('admin.feedback_management');
+    // Admin-shared routes for editor
+    Route::get('gallery_management', [GalleryController::class, 'show']);
+    Route::get('add_gallery', [GalleryController::class, 'create']);
+    Route::post('add_gallery', [GalleryController::class, 'store']);
+    Route::get('edit_gallery/{id}', [GalleryController::class, 'edit']);
+    Route::post('edit_gallery/{id}', [GalleryController::class, 'update']);
+    Route::get('delete_gallery/{id}', [GalleryController::class, 'destroy']);
+    
+    Route::get('feedback_management', function () {
+        return view('admin.feedback_management');
+    });
+
+    Route::get('blog_management', function () {
+        return view('admin.blog_management');
+    });
 });
 
 

@@ -63,7 +63,7 @@
         <h3 class="brand-text mb-4">Welcome Back</h3>
         <p class="text-muted mb-4">Please enter your details to login</p>
 
-       <form method="POST" action="/login-auth">
+       <form method="POST" action="/login_auth">
     @csrf
 
     <div class="mb-3 text-start">
