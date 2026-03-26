@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 20, 2026 at 12:11 PM
+-- Generation Time: Mar 26, 2026 at 05:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -167,10 +167,19 @@ CREATE TABLE `clients` (
   `email` varchar(100) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `status` enum('block','unblock') NOT NULL DEFAULT 'unblock',
+  `status` enum('unblock','block') DEFAULT 'unblock',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`, `email`, `phone`, `password`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Riddhi Gandharv', 'riddhigandharav@gmail.com', '9874561230', '$2y$12$SqAXHea.7MuN6TG5StMpbuyd31fv2DFAERCEbM5cf1sApb.uZcJra', 'unblock', '2026-03-22 08:58:10', '2026-03-22 08:58:10'),
+(3, 'Tanisha Rana', 'tanvirana2316@gmail.com', '7894561230', '$2y$12$1w/1omyg59LulWBiYKFBE.OJf7.wNtAkVP5adYvZLAOe53hQBY5ri', 'unblock', '2026-03-22 23:15:28', '2026-03-22 23:15:28'),
+(5, 'John Doe', 'john@gmail.com', '9999999999', '$2y$12$nwyRf/45RerBv7N8SJB.Xexsxg1zjwDmAaX7THZgDnRJmhNDo6Lcy', 'unblock', '2026-03-22 23:30:16', '2026-03-22 23:30:16');
 
 -- --------------------------------------------------------
 
@@ -266,7 +275,11 @@ INSERT INTO `enquiries` (`id`, `name`, `email`, `subject`, `message`, `status`, 
 (4, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I would like to enquire about a kids photoshoot.\r\nPlease share details about themes, pricing, and availability.”', 'new', '2026-03-19 08:18:37', '2026-03-19 08:18:37'),
 (5, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I would like to enquire about a kids photoshoot.\r\nPlease share details about themes, pricing, and availability.”', 'new', '2026-03-19 08:19:34', '2026-03-19 08:19:34'),
 (6, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', '“I want to plan a photoshoot for my child.\r\nPlease let me know the available themes and charges.”', 'new', '2026-03-19 08:21:31', '2026-03-19 08:21:31'),
-(7, 'Tanisha Rana', 'tanvirana2316@gmail.com', 'Kids', '“I want to plan a photoshoot for my child.\r\nPlease let me know the available themes and charges.”', 'new', '2026-03-19 08:22:36', '2026-03-19 08:22:36');
+(7, 'Tanisha Rana', 'tanvirana2316@gmail.com', 'Kids', '“I want to plan a photoshoot for my child.\r\nPlease let me know the available themes and charges.”', 'new', '2026-03-19 08:22:36', '2026-03-19 08:22:36'),
+(8, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', 'About Photoshoot and Timing', 'new', '2026-03-22 08:11:36', '2026-03-22 08:11:36'),
+(9, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Kids', 'About KIds', 'new', '2026-03-22 08:13:34', '2026-03-22 08:13:34'),
+(10, 'Riddhi Gandharva', 'riddhigandharav@gmail.com', 'Maternity', 'About Maternity', 'new', '2026-03-22 08:14:34', '2026-03-22 08:14:34'),
+(11, 'Tanisha Rana', 'tanvirana2316@gmail.com', 'New Born', 'About New Born', 'new', '2026-03-22 08:15:57', '2026-03-22 08:15:57');
 
 -- --------------------------------------------------------
 
@@ -781,7 +794,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `client_albums`
@@ -811,7 +824,7 @@ ALTER TABLE `editors`
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
